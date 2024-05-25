@@ -1,0 +1,36 @@
+<% layout("/layout/boilerplate") %>
+
+<body>
+    <form action="/listings/<%= list._id %>/edit?_method=PATCH" class="row g-3" method="post" autocomplete="on">
+        <h3>Edit List</h3>
+            <div class="col-12">
+              <label for="title" class="form-label">Title</label>
+              <input type="text" class="form-control" id="title"  name="title" value="<%= list.title %>">
+            </div>
+            <div class="col-12">
+              <label for="desc" class="form-label">Description</label>
+              <textarea name="description" id="desc" class="form-control"><%= list.description %></textarea>
+            </div>
+            <div class="col-md-6">
+              <label for="img" class="form-label">Image link</label>
+              <input type="text" class="form-control" id="img" value="<%= list.image %>" name="image">
+            </div>
+            <div class="col-md-6">
+              <label for="price" class="form-label">Price</label>
+              <input type="number" class="form-control" value="<%= list.price %>" name="price">
+            </div>
+            <div class="col-md-6">
+              <label for="country" class="form-label">Country</label>
+              <input type="text" class="form-control" id="country" name="country" value="<%= list.country %>">
+            </div>
+            <div class="col-md-6">
+                <label for="location" class="form-label">City</label>
+                <input type="text" class="form-control" id="location" name="location" value="<%= list.location %>">
+            </div>
+            
+            <br><br>
+            <div class="col-12">
+              <button type="submit" class="btn btn-warning">Edit</button>
+            </div>
+    </form>
+</body>

@@ -1,0 +1,51 @@
+<% layout("/layout/boilerplate") %>
+
+<body>
+    <form action="/listings/new" method="post" class="row g-3" autocomplete="on">
+            <h3>Create New List</h3>
+            <div class="col-12">
+              <label for="title" class="form-label">Title</label>
+              <input type="text" class="form-control" id="title"  name="title" placeholder="Enter a catchy Title">
+            </div>
+            <div class="col-12">
+              <label for="desc" class="form-label">Description</label>
+              <textarea name="description" id="desc" class="form-control" placeholder="Enter Description"></textarea>
+            </div>
+            <div class="col-md-6">
+              <label for="img" class="form-label">Image link</label>
+              <input type="text" class="form-control" id="img" placeholder="https://unsplash.com/images/....." name="image">
+            </div>
+            <div class="col-md-6">
+              <label for="price" class="form-label">Price</label>
+              <input type="number" class="form-control" placeholder="&#8377; 1,200" name="price">
+            </div>
+            <div class="col-md-6">
+              <label for="country" class="form-label">Country</label>
+              <input type="text" class="form-control" id="country" name="country" placeholder="India">
+            </div>
+            <div class="col-md-6">
+                <label for="location" class="form-label">Country</label>
+                <input type="text" class="form-control" id="location" name="location" placeholder="Ahmedabad, Gujarat">
+            </div>
+            
+            <br><br>
+            <div class="col-12">
+              <button type="submit" class="btn btn-primary">Add</button>
+            </div>
+          
+
+
+
+
+
+
+        <!-- <h1>Create New List</h1>
+        <label for="title">Title : </label><input type="text" name="title" id="title"><br /><br />
+        <label for="description">Description : </label><textarea name="description" id="description"></textarea><br /><br />
+        <label for="image">Image Url : </label><input type="url" name="image" id="image"><br /><br />
+        <label for="price">Price : </label><input type="number" name="price" id="price"><br /><br />
+        <label for="country">Country : </label><input type="text" name="country" id="country"><br /><br />
+        <label for="location">Location : </label><input type="text" name="location" id="location"><br /><br />
+        <input type="submit" value="Create"> -->
+    </form>
+</body>

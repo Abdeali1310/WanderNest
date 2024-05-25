@@ -1,0 +1,159 @@
+body{
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* body container */
+.body-container{
+    margin-block: 25px;
+    margin-left: 7rem;
+    margin-right: 1rem;
+    flex:1
+}
+
+/* navbar */
+
+.navbar{
+    background: white;
+}
+
+.nav-link{
+    color:black !important;
+}
+.fa-compass{
+    color: #fe424d;
+    font-size: 2rem;
+}
+
+/* footer */
+.f-info{
+    height: 9rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 1rem;
+    background: #ebebeb;
+    margin-top: 1.5%;
+}
+
+.f-info-socials,.f-info-links{
+    display: flex;
+    gap: 1.5rem;
+}
+.f-info-brand{
+    font-size: 1.2rem;
+}
+.f-info-socials i{
+    font-size: 1.25rem;
+}
+
+.f-info-links a{
+    text-decoration: none;
+    color:black;
+    font-size: 1.05rem;
+}
+
+.f-info-links a:hover{
+    text-decoration: underline;
+}
+
+/* card */
+.card-container{
+    display: flex;
+    flex-wrap: wrap;
+    margin-block: 1.5rem;
+    justify-content:flex-start;
+}
+.card{
+    margin-bottom: 15px;
+    margin-inline: 15px;
+}
+.card-container a{
+    text-decoration: none;
+    color: black;
+}
+
+.card:hover{
+    box-shadow: 2px 2px 4px 2px rgb(207, 188, 188);
+    transition: all 0.2s;
+}
+
+.show-card{
+    width: 700px;
+    height: 500px;
+    margin-left:30%;
+}
+
+.show-card img{
+    width: 600px;
+    height: 400px;
+    border-radius: 5%;
+}
+.show-card-body{
+    display: flex;
+    flex-direction: column;
+    gap: 3spx;
+}
+
+.show-card-title{
+    font-size: 2rem;
+    margin-top: 7px;
+}
+
+.show-card-text{
+    font-size:1.1rem;
+}
+
+.btns{
+    display: flex;
+    align-items: center;
+}
+.btns button{
+    width:90px;
+}
+form{
+    width: 50%;
+    margin:auto !important;
+}
+
+/* media queries */
+@media only screen and (min-width: 1024px) and (max-width: 1440px) {
+    .body-container{
+        margin-block: 25px;
+        margin-left: 3rem;
+        margin-right: 1rem;
+    }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 1024px) {
+    .body-container{
+        margin-block: 25px;
+        margin-left: 3rem;
+        margin-right: 1rem;
+    }
+    
+}
+
+@media only screen and (min-width: 425px) and (max-width: 767px) {
+    .body-container{
+        margin-block: 25px;
+        margin-left: 2rem;
+        margin-right: 1rem;
+    }
+    form{
+        width:100%;
+    }
+}
+
+@media only screen and (min-width: 320px) and (max-width: 425px) {
+    .body-container{
+        margin-block: 25px;
+        margin-left: 1rem;
+        margin-right: 1rem;
+    }
+    form{
+        width:100%;
+    }
+}

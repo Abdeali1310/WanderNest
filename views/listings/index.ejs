@@ -1,0 +1,24 @@
+<% layout("/layout/boilerplate") %>
+
+<body>
+  <h3>All Listings</h3>
+
+    <div class="card-container">
+        <% allListings.map((list)=>{ %>
+            <a href="/listings/<%= list._id %>">
+                <div class="card" style="width: 18rem">
+                    <img src="<%= list.image %>" class="card-img-top" alt="<%= list.title %>" />
+                    <div class="card-body">
+                      <h5 class="card-title"><%= list.title %></h5>
+                      <p class="card-text">
+                        &#8377; <%= list.price.toLocaleString("en-IN") %> / night <br />
+                        <%= list.location %><br /><br />
+                      </p>
+                      <a href="/listings/<%= list._id %>" style="color:white" class="btn btn-primary">More Details...</a>
+                    </div>
+                  </div>
+            </a>
+        <% }) %>
+    </div>
+  
+</body>
