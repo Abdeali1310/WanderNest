@@ -1,15 +1,15 @@
 <% layout("/layout/boilerplate") %>
 
 <body>
-    <form action="/listings/new" method="post" class="row g-3" autocomplete="on">
+    <form action="/listings/new" method="post" class="row g-3 needs-validation" autocomplete="on" novalidate >
             <h3>Create New List</h3>
             <div class="col-12">
               <label for="title" class="form-label">Title</label>
-              <input type="text" class="form-control" id="title"  name="title" placeholder="Enter a catchy Title">
+              <input type="text" class="form-control" id="title"  name="title" placeholder="Enter a catchy Title" required>
             </div>
             <div class="col-12">
               <label for="desc" class="form-label">Description</label>
-              <textarea name="description" id="desc" class="form-control" placeholder="Enter Description"></textarea>
+              <textarea name="description" id="desc" class="form-control" placeholder="Enter Description" required></textarea>
             </div>
             <div class="col-md-6">
               <label for="img" class="form-label">Image link</label>
@@ -17,15 +17,15 @@
             </div>
             <div class="col-md-6">
               <label for="price" class="form-label">Price</label>
-              <input type="number" class="form-control" placeholder="&#8377; 1,200" name="price">
+              <input type="number" class="form-control" placeholder="&#8377; 1,200" name="price" required>
             </div>
             <div class="col-md-6">
               <label for="country" class="form-label">Country</label>
-              <input type="text" class="form-control" id="country" name="country" placeholder="India">
+              <input type="text" class="form-control" id="country" name="country" placeholder="India" required>
             </div>
             <div class="col-md-6">
-                <label for="location" class="form-label">Country</label>
-                <input type="text" class="form-control" id="location" name="location" placeholder="Ahmedabad, Gujarat">
+                <label for="location" class="form-label">Location</label>
+                <input type="text" class="form-control" id="location" name="location" placeholder="Ahmedabad, Gujarat" required>
             </div>
             
             <br><br>
