@@ -1,31 +1,49 @@
 <% layout("/layout/boilerplate") %>
 
 <body>
-    <form action="/listings/<%= list._id %>/edit?_method=PATCH" class="row g-3" method="post" autocomplete="on">
+    <form action="/listings/<%= list._id %>/edit?_method=PATCH" class="row g-3 needs-validation" method="post" autocomplete="on" novalidate>
         <h3>Edit List</h3>
             <div class="col-12">
               <label for="title" class="form-label">Title</label>
-              <input type="text" class="form-control" id="title"  name="title" value="<%= list.title %>">
+              <input type="text" class="form-control" id="title"  name="title" value="<%= list.title %>" required>
+              <div class="invalid-feedback">
+                Title is Required
+              </div>
             </div>
             <div class="col-12">
               <label for="desc" class="form-label">Description</label>
-              <textarea name="description" id="desc" class="form-control"><%= list.description %></textarea>
+              <textarea name="description" id="desc" class="form-control" required><%= list.description %></textarea>
+              <div class="invalid-feedback">
+                Description is Required
+              </div>
             </div>
             <div class="col-md-6">
               <label for="img" class="form-label">Image link</label>
-              <input type="text" class="form-control" id="img" value="<%= list.image %>" name="image">
+              <input type="text" class="form-control" id="img" value="<%= list.image %>" name="image" required>
+              <div class="valid-feedback">
+                
+              </div>
             </div>
             <div class="col-md-6">
               <label for="price" class="form-label">Price</label>
-              <input type="number" class="form-control" value="<%= list.price %>" name="price">
+              <input type="number" class="form-control" value="<%= list.price %>" name="price" required>
+              <div class="invalid-feedback">
+                Price should be a Number
+              </div>
             </div>
             <div class="col-md-6">
               <label for="country" class="form-label">Country</label>
-              <input type="text" class="form-control" id="country" name="country" value="<%= list.country %>">
+              <input type="text" class="form-control" id="country" name="country" value="<%= list.country %>" required>
+              <div class="invalid-feedback">
+                Please Enter a valid Country
+              </div>
             </div>
             <div class="col-md-6">
                 <label for="location" class="form-label">City</label>
-                <input type="text" class="form-control" id="location" name="location" value="<%= list.location %>">
+                <input type="text" class="form-control" id="location" name="location" value="<%= list.location %>" required>
+                <div class="invalid-feedback">
+                  Please Enter a valid Location
+                </div>
             </div>
             
             <br><br>
