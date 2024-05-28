@@ -51,8 +51,9 @@ app.post(
   "/listings/new",
   wrapAsync(async (req, res, next) => {
     const { title, description, image, price, country, location } = req.body;
+    console.log(req.body);
     //checking for custom error
-    if (!title || !description || !image || !price || !country || !location) {
+    if (!title || !description || !price || !country || !location) {
       throw new expressError(400, 'Provide all required list data')
     }
     const newList = await Listing.create({
@@ -117,7 +118,7 @@ app.use((req,res,next)=>{
 //error handling middleware
 app.use((err,req,res,next)=>{
   const {status = 500,message = 'Something went wrong!'} = err;
-  res.status(status).send(message);
+  res.status(status).render('error.ejs',{message})
 })
 
 
