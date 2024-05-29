@@ -9,6 +9,8 @@ const ejsMate = require("ejs-mate");
 const { connectDB } = require("./connection");
 const { wrapAsync } = require("./utils/wrapAsync");
 const expressError = require("./utils/expressError");
+const listingSchema = require("./schema");
+
 require("dotenv").config();
 
 //MongoDB connection
@@ -46,16 +48,21 @@ app.get("/listings/new", wrapAsync(async (req, res) => {
   res.render("listings/new.ejs");
 }));
 
+const validateListing = (req,res,next)=>{
+  const result = listingSchema.validate(req.body);
+  if(result.error){
+    throw new expressError(400,result.error)
+  }else{
+    next()
+  }
+}
 //handling post request for create
 app.post(
-  "/listings/new",
+  "/listings/new",validateListing,
   wrapAsync(async (req, res, next) => {
+    
     const { title, description, image, price, country, location } = req.body;
-    console.log(req.body);
     //checking for custom error
-    if (!title || !description || !price || !country || !location) {
-      throw new expressError(400, 'Provide all required list data')
-    }
     const newList = await Listing.create({
       title,
       description,
@@ -76,7 +83,7 @@ app.get("/listings/:id/edit", wrapAsync(async (req, res) => {
 }));
 
 //handling put route
-app.patch("/listings/:id/edit", wrapAsync(async (req, res) => {
+app.patch("/listings/:id/edit",validateListing, wrapAsync(async (req, res) => {
   const id = req.params.id;
   const { title, description, image, price, country, location } = req.body;
   const editedUser = await Listing.findByIdAndUpdate(
