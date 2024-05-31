@@ -3,10 +3,9 @@
 <body>
   
   <div class="show-card" style="width: 18rem">
-    <h3>List :</h3>
+    <h3><%= list.title %></h3>
     <img src="<%= list.image %>" class="card-img-top" alt="<%= list.title %>" />
     <div class="show-card-body">
-      <h5 class="show-card-title"><%= list.title %></h5>
       <p class="show-card-text">
         <%= list.description %> <br />
         &#8377; <%= list.price.toLocaleString("en-IN") %> / night <br />
