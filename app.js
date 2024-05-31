@@ -10,6 +10,7 @@ const { connectDB } = require("./connection");
 const { wrapAsync } = require("./utils/wrapAsync");
 const expressError = require("./utils/expressError");
 const listingSchema = require("./schema");
+const Review = require("./models/review");
 
 require("dotenv").config();
 
@@ -105,6 +106,25 @@ app.get("/listings/:id", wrapAsync(async (req, res) => {
   const list = await Listing.findById(id);
   res.render("listings/show.ejs", { list });
 }));
+
+
+//handling post request for reviews and maintaining relationship between listings and review
+app.post('/listings/:id/reviews',async (req,res)=>{
+  const {rating,review} = req.body;
+  const id = req.params.id;
+  const rev = await Review.create({
+    rating,
+    comment:review,
+  })
+  //updating the listing by providing its particular review's id and maintaining relationship 
+  const listing = await Listing.findById(id);
+  listing.reviews.push(rev);
+  await listing.save();
+  
+  // const updatedListing = await Listing.findById(id).populate('reviews').exec();
+  // console.log((updatedListing));
+  res.redirect(`/listings/${id}`)
+})
 
 //creating new list
 // app.get('/testListing',async(req,res)=>{

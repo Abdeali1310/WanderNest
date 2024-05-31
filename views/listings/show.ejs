@@ -24,11 +24,37 @@
     </div>
   </div>
 
-  <!-- <ul>
-    <li><%= list.title %></li>
-    <li><%= list.description %></li>
-    <li>&#8377; <%= list.price.toLocaleString("en-IN") %></li>
-    <li><%= list.location %></li>
-    <li><%= list.country %></li>
-  </ul> -->
+  
+
+  <!-- Review Form -->
+  <div class="review-form-container">
+    <hr>
+    <h4 style="text-align: center;">Leave A Review</h4>
+    <form action="/listings/<%= list.id %>/reviews" method="post" class="review-form">
+      <div class="mb-3">
+        <label for="rating" class="form-label">Rating : </label>
+        <input type="range" min="1" max="5" name="rating" id="rating" class="form-range">
+        <div id="rating-value" class="rating-value">3</div>
+      </div>
+      <div class="mb-3">
+        <label for="review" class="form-label">Review</label>
+        <textarea name="review" id="review" class="form-control " rows="6" cols="10"></textarea>
+      </div>
+      <button type="submit" class="btn btn-outline-dark">Submit</button>
+    </form>
+  </div>
 </body>
+
+<script>
+  document.addEventListener('DOMContentLoaded', (event) => {
+      const ratingInput = document.getElementById('rating');
+      const ratingValue = document.getElementById('rating-value');
+
+      ratingValue.textContent = ratingInput.value;
+      ratingInput.addEventListener('input', function() {
+          ratingValue.textContent = ratingInput.value;
+      });
+  });
+</script>
+
+

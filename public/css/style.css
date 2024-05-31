@@ -117,6 +117,12 @@ form{
     margin:auto !important;
 }
 
+
+/* review form */
+
+.review-form-container{
+    margin-top: 10rem;
+}
 /* media queries */
 @media only screen and (min-width: 1024px) and (max-width: 1440px) {
     .body-container{
