@@ -9,7 +9,7 @@ const ejsMate = require("ejs-mate");
 const { connectDB } = require("./connection");
 const { wrapAsync } = require("./utils/wrapAsync");
 const expressError = require("./utils/expressError");
-const listingSchema = require("./schema");
+const {listingSchema,reviewSchema} = require("./schema");
 const Review = require("./models/review");
 
 require("dotenv").config();
@@ -49,6 +49,7 @@ app.get("/listings/new", wrapAsync(async (req, res) => {
   res.render("listings/new.ejs");
 }));
 
+//schema validation for listing
 const validateListing = (req,res,next)=>{
   const result = listingSchema.validate(req.body);
   if(result.error){
@@ -57,6 +58,17 @@ const validateListing = (req,res,next)=>{
     next()
   }
 }
+
+//schema validation for review
+const validateReview = (req,res,next)=>{
+  const result = reviewSchema.validate(req.body);
+  if(result.error){
+    throw new expressError(400,result.error)
+  }else{
+    next()
+  }
+}
+
 //handling post request for create
 app.post(
   "/listings/new",validateListing,
@@ -109,7 +121,7 @@ app.get("/listings/:id", wrapAsync(async (req, res) => {
 
 
 //handling post request for reviews and maintaining relationship between listings and review
-app.post('/listings/:id/reviews',async (req,res)=>{
+app.post('/listings/:id/reviews',validateReview,wrapAsync(async (req,res)=>{
   const {rating,review} = req.body;
   const id = req.params.id;
   const rev = await Review.create({
@@ -124,19 +136,9 @@ app.post('/listings/:id/reviews',async (req,res)=>{
   // const updatedListing = await Listing.findById(id).populate('reviews').exec();
   // console.log((updatedListing));
   res.redirect(`/listings/${id}`)
-})
+}))
 
-//creating new list
-// app.get('/testListing',async(req,res)=>{
-//     const newList = await Listing.create({
-//         title:"New Villa",
-//         description:"By the Beach",
-//         price:1000,
-//         location:"Goa",
-//         country:"India"
-//     })
-//     res.send({status:"completed"})
-// })
+
 
 app.use((req,res,next)=>{
   next(new expressError(404,'Page Not Found'))
