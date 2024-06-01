@@ -106,6 +106,7 @@ app.patch("/listings/:id/edit",validateListing, wrapAsync(async (req, res) => {
   res.redirect(`/listings/${id}`);
 }));
 
+
 //delete route
 app.delete("/listings/:id/delete", wrapAsync(async (req, res) => {
   const id = req.params.id;
@@ -145,6 +146,7 @@ app.delete('/listings/:id/reviews/:reviewId',wrapAsync(async (req,res)=>{
   await Review.findByIdAndDelete(reviewId)
   res.redirect(`/listings/${id}`)
 }))
+
 
 app.use((req,res,next)=>{
   next(new expressError(404,'Page Not Found'))
