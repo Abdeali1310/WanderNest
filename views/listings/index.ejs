@@ -6,7 +6,7 @@
     <div class="card-container">
         <% allListings.map((list)=>{ %>
             <a href="/listings/<%= list._id %>">
-                <div class="card" style="width: 18rem">
+                <div class="card listing-card" style="width: 18rem">
                     <img src="<%= list.image %>" class="card-img-top" alt="<%= list.title %>" />
                     <div class="card-body">
                       <h5 class="card-title"><%= list.title %></h5>

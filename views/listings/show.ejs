@@ -43,6 +43,32 @@
       </div>
       <button type="submit" class="btn btn-outline-dark">Submit</button>
     </form>
+    <br><br>
+    <!-- adding reviews -->
+    <hr />
+    <% if(!list.reviews.length) { %>
+      <h4>No Reviews Yet</h4>
+    <% } else { %>
+    <h4 style="text-align: center;">All Reviews</h4>
+    <div class="reviews mt-3" style="display: flex;">
+      <% list.reviews.map((review)=>{ %>
+        <div class="card review-card mb-3 mt-3 ms-4">
+          <div class="card-body">
+            <h5 class="card-title"> @ Username</h5>
+            <p class="card-text"><%= review.comment %></p>
+            <div class="card-text" style="display: flex; justify-content: space-between;">
+              <span><%= review.rating %> stars</span>
+              <span>
+                <form style="display: inline;" method="post" action="/listings/<%= list._id %>/reviews/<%= review._id %>?_method=DELETE" >
+                  <button class="btn btn-sm btn-dark">Delete</button>
+                </form>
+              </span>
+            </div>
+          </div>
+        </div>
+      <% }) %>
+    </div>
+    <% } %>
   </div>
 </body>
 

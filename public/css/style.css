@@ -73,7 +73,7 @@ body{
     color: black;
 }
 
-.card:hover{
+.listing-card:hover{
     box-shadow: 2px 2px 4px 2px rgb(207, 188, 188);
     transition: all 0.2s;
 }
@@ -122,6 +122,14 @@ form{
 
 .review-form-container{
     margin-top: 10rem;
+}
+
+.reviews{
+    display: flex;
+    flex-wrap: wrap;
+}
+.review-card{
+    width:400px;
 }
 /* media queries */
 @media only screen and (min-width: 1024px) and (max-width: 1440px) {
