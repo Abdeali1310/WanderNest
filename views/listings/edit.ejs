@@ -12,7 +12,7 @@
             </div>
             <div class="col-12">
               <label for="desc" class="form-label">Description</label>
-              <textarea name="description" id="desc" class="form-control" required><%= list.description %></textarea>
+              <textarea name="description" id="desc" minlength="15" maxlength="100" class="form-control" required><%= list.description %></textarea>
               <div class="invalid-feedback">
                 Description is Required
               </div>
