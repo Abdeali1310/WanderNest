@@ -105,7 +105,17 @@ body{
     margin-top: 5px;
     width: 600px;
 }
+.textarea-wrapper {
+    width: 100%;
+    max-width: 600px;
+}
 
+.auto-resize {
+    width: 100%;
+    overflow: hidden;
+    resize: none; /* Prevent manual resizing */
+    box-sizing: border-box; /* Include padding and border in element's total width and height */
+}
 .btns{
     display: flex;
     align-items: center;
