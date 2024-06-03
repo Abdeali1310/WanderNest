@@ -3,6 +3,8 @@ const app = express();
 const path = require("path");
 const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate");
+const session = require('express-session')
+const flash = require('connect-flash')
 
 const { connectDB } = require("./connection");
 const expressError = require("./utils/expressError");
@@ -28,6 +30,21 @@ app.use(express.json());
 app.use(methodOverride("_method"));
 app.use(express.static(path.join(__dirname, "/public")));
 
+//session
+const sessionOptions = {
+  secret:"mySecretKey",
+  resave:false,
+  saveUninitialized:true,
+  cookie:{
+    expires:Date.now() + 1 * 24 * 60 * 60 * 1000,
+    maxAge:1 * 24 * 60 * 60 * 1000,
+    httpOnly:true,
+  }
+}
+app.use(session(sessionOptions))
+//flash
+app.use(flash())
+
 //for ejs-mate
 app.engine("ejs", ejsMate);
 
@@ -35,6 +52,13 @@ app.engine("ejs", ejsMate);
 app.get("/", (req, res) => {
   res.send("Hey");
 });
+
+//middleware for flash message
+app.use((req,res,next)=>{
+  res.locals.success = req.flash('success')
+  res.locals.error = req.flash('error')
+  next();
+})
 
 //Routes
 //Listing Route
