@@ -11,7 +11,12 @@ const expressError = require("./utils/expressError");
 
 //routes
 const listingRoute = require('./routes/listingRoute')
-const reviewRoute = require('./routes/reviewRoute')
+const reviewRoute = require('./routes/reviewRoute');
+const userRoute = require('./routes/userRoute')
+//passport
+const passport = require("passport");
+const User = require("./models/user");
+const LocalStrategy = require('passport-local');
 
 require("dotenv").config();
 
@@ -45,6 +50,15 @@ app.use(session(sessionOptions))
 //flash
 app.use(flash())
 
+//for passport
+app.use(passport.initialize())
+app.use(passport.session());
+passport.use(new LocalStrategy(User.authenticate()))
+
+//serialize and deserialize
+passport.serializeUser(User.serializeUser())
+passport.deserializeUser(User.deserializeUser())
+
 //for ejs-mate
 app.engine("ejs", ejsMate);
 
@@ -60,10 +74,12 @@ app.use((req,res,next)=>{
   next();
 })
 
+
+
 //Routes
-//Listing Route
 app.use('/listings',listingRoute)
 app.use('/listings/:id/reviews',reviewRoute)
+app.use('/user',userRoute)
 
 app.use((req,res,next)=>{
   next(new expressError(404,'Page Not Found'))

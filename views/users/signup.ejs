@@ -1,0 +1,35 @@
+<% layout("/layout/boilerplate") %>
+
+<body>
+    <form action="/user/signup" method="post" class="row g-3 needs-validation" autocomplete="on" novalidate >
+        <h3>SignUp for Wanderlust</h3>
+        <div class="col-12">
+          <label for="username" class="form-label">Username</label>
+          <input type="text" class="form-control" id="username"  name="username" placeholder="Enter a valid username" required>
+          <div class="valid-feedback">
+            Looks good!
+          </div>
+        </div>
+        <div class="col-12">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" class="form-control" id="email"  name="email" placeholder="Enter a valid email" required>
+            <div class="valid-feedback">
+              Correct!
+            </div>
+            <div class="invalid-feedback">
+                Email field is required
+            </div>
+          </div>
+        <div class="col-12">
+          <label for="password" class="form-label">Password</label>
+          <input name="password" type="password" id="password" class="form-control" required>
+          <div class="invalid-feedback">
+            Password field is required
+          </div>
+        </div>
+        <br><br>
+        <div class="col-12">
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+</form>
+</body>
