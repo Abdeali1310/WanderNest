@@ -2,20 +2,10 @@ const express = require("express");
 const router = express.Router({ mergeParams: true });
 const Listing = require("../models/listing");
 const { wrapAsync } = require("../utils/wrapAsync");
-const expressError = require("../utils/expressError");
-const { reviewSchema } = require("../schema");
 const Review = require("../models/review");
-const { isLoggedIn } = require("../middlewares/auth");
+const { isLoggedIn, validateReview } = require("../middlewares/auth");
 
-//schema validation for review
-const validateReview = (req, res, next) => {
-  const result = reviewSchema.validate(req.body);
-  if (result.error) {
-    throw new expressError(400, result.error);
-  } else {
-    next();
-  }
-};
+
 
 //handling post request for reviews and maintaining relationship between listings and review
 router.post(

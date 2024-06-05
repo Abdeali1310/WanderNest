@@ -42,10 +42,18 @@ router.post('/login',redirectUrl,passport.authenticate ('local',{
     failureRedirect:'/user/login',
     failureFlash: true,
 }),async (req,res)=>{
-    const {username} = req.body;
-    req.flash('success',`Hey ${username}, Welcome Back to Wanderlust`)
-    let redirect = res.locals.redirectUrl || '/listings'
-    res.redirect(redirect)
+  const { username } = req.body;
+  req.flash('success', `Hey ${username}, Welcome Back to Wanderlust`);
+
+  let redirectUrl = res.locals.redirectUrl || '/listings';
+
+  // Check if the redirect URL is for a delete route
+  const deleteMatch = redirectUrl.match(/\/listings\/([^\/]+)\/delete/);
+  if (deleteMatch && redirectUrl.includes('?_method=DELETE')) {
+      redirectUrl = '/listings';
+  }
+
+  res.redirect(redirectUrl);
 })
 
 

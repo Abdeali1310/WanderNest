@@ -2,19 +2,9 @@ const express = require("express");
 const router = express.Router();
 const Listing = require("../models/listing");
 const { wrapAsync } = require("../utils/wrapAsync");
-const expressError = require("../utils/expressError");
-const { listingSchema } = require("../schema");
-const { isLoggedIn } = require("../middlewares/auth");
+const { isLoggedIn, isOwner, validateListing } = require("../middlewares/auth");
 
-//schema validation for listing
-const validateListing = (req, res, next) => {
-  const result = listingSchema.validate(req.body);
-  if (result.error) {
-    throw new expressError(400, result.error);
-  } else {
-    next();
-  }
-};
+
 
 //listing route
 router.get(
@@ -40,7 +30,7 @@ router.post(
   wrapAsync(async (req, res, next) => {
     const { title, description, image, price, country, location } = req.body;
     //checking for custom error
-    const newList = await Listing.create({
+    const newList = new Listing({
       title,
       description,
       image,
@@ -48,6 +38,8 @@ router.post(
       country,
       location,
     });
+    newList.owner =  req.user._id;
+    await newList.save();
     //flash message for listing created
     req.flash('success','New Listing Created!')
     res.redirect("/listings");
@@ -56,7 +48,7 @@ router.post(
 
 //edit get route
 router.get(
-  "/:id/edit",isLoggedIn,
+  "/:id/edit",isLoggedIn,isOwner,
   wrapAsync(async (req, res) => {
     const id = req.params.id;
     const list = await Listing.findById(id);
@@ -70,7 +62,7 @@ router.get(
 
 //handling put route
 router.patch(
-  "/:id/edit",isLoggedIn,
+  "/:id/edit",isLoggedIn,isOwner,
   validateListing,
   wrapAsync(async (req, res) => {
     const id = req.params.id;
@@ -86,7 +78,7 @@ router.patch(
 
 //delete route
 router.delete(
-  "/:id/delete",isLoggedIn,
+  "/:id/delete",isLoggedIn,isOwner,
   wrapAsync(async (req, res) => {
     const id = req.params.id;
     const deletedList = await Listing.findByIdAndDelete(id);
@@ -99,7 +91,7 @@ router.get(
   "/:id",
   wrapAsync(async (req, res) => {
     const id = req.params.id;
-    const list = await Listing.findById(id).populate("reviews").exec();
+    const list = await Listing.findById(id).populate("reviews").populate('owner').exec();
     if(!list){
       req.flash('error','List not found!')
       res.redirect('/listings')

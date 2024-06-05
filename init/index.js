@@ -1,4 +1,4 @@
-const sampleData = require('./data')
+let sampleData = require('./data')
 const mongoose = require('mongoose');
 const Listing = require('../models/listing');
 
@@ -7,6 +7,10 @@ mongoose.connect("mongodb://127.0.0.1:27017/wanderlust").then(()=>console.log("D
 
 async function init(){
     await Listing.deleteMany({})
+    sampleData = sampleData.map((obj)=>({
+        ...obj,
+        owner:'666038e480187e89072f75e5',
+    }));
     await Listing.insertMany(sampleData);
     console.log("DB Initialized");
 }
