@@ -91,7 +91,7 @@ router.get(
   "/:id",
   wrapAsync(async (req, res) => {
     const id = req.params.id;
-    const list = await Listing.findById(id).populate("reviews").populate('owner').exec();
+    const list = await Listing.findById(id).populate({path:"reviews",populate:{path:'author'}}).populate('owner').exec();
     if(!list){
       req.flash('error','List not found!')
       res.redirect('/listings')

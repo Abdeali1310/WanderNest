@@ -48,8 +48,12 @@ router.post('/login',redirectUrl,passport.authenticate ('local',{
   let redirectUrl = res.locals.redirectUrl || '/listings';
 
   // Check if the redirect URL is for a delete route
-  const deleteMatch = redirectUrl.match(/\/listings\/([^\/]+)\/delete/);
-  if (deleteMatch && redirectUrl.includes('?_method=DELETE')) {
+
+  const deleteMatchListings = redirectUrl.match(/\/listings\/([^\/]+)\/delete/);
+  const deleteMatchReviews = redirectUrl.match(/\/listings\/([^\/]+)\/reviews\/([^\/]+)\?_method=DELETE/);
+
+  if (deleteMatchListings && redirectUrl.includes('?_method=DELETE') || deleteMatchReviews && redirectUrl.includes('?_method=DELETE')) {
+      // If the URL contains "/delete" in either listings or reviews
       redirectUrl = '/listings';
   }
 

@@ -2,6 +2,7 @@ const Listing = require("../models/listing");
 const expressError = require("../utils/expressError");
 const { listingSchema } = require("../schema");
 const { reviewSchema } = require("../schema");
+const Review = require("../models/review");
 //schema validation for listing
 const validateListing = (req, res, next) => {
     const result = listingSchema.validate(req.body);
@@ -48,4 +49,15 @@ const isOwner = async (req,res,next)=>{
     }
     next();
 }
-module.exports =  {isLoggedIn,redirectUrl,validateListing,isOwner,validateReview}
+
+const isReviewOwner = async (req,res,next)=>{
+  const {id,reviewId} = req.params;
+  const review = await Review.findById(reviewId);
+  let currUser = res.locals.currentUser._id || null
+  if(!review.author.equals(currUser)){
+    req.flash('error','You are not the Author of this Review')
+    return res.redirect(`/listings/${id}`)
+  }
+  next();
+}
+module.exports =  {isLoggedIn,redirectUrl,isReviewOwner,validateListing,isOwner,validateReview}
