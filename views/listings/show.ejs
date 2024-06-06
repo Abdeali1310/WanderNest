@@ -36,11 +36,25 @@
     <% if(currentUser) { %>
     <h4 style="text-align: center;">Leave A Review</h4>
     <form action="/listings/<%= list.id %>/reviews" method="post" class="review-form needs-validation" novalidate>
+      
+      
       <div class="mb-3">
         <label for="rating" class="form-label">Rating : </label>
-        <input type="range" min="1" max="5" name="rating" id="rating" class="form-range">
-        <div id="rating-value" class="rating-value">3</div>
-      </div>
+      <fieldset class="starability-slot">
+        <input type="radio" id="no-rate" class="input-no-rate" name="rating" value="0" checked aria-label="No rating." />
+        <input name="rating" type="radio" id="first-rate1" name="rating" value="1" />
+        <label for="first-rate1" title="Terrible">1 star</label>
+        <input name="rating" type="radio" id="first-rate2" name="rating" value="2" />
+        <label for="first-rate2" title="Not good">2 stars</label>
+        <input name="rating" type="radio" id="first-rate3" name="rating" value="3" />
+        <label for="first-rate3" title="Average">3 stars</label>
+        <input name="rating" type="radio" id="first-rate4" name="rating" value="4" />
+        <label for="first-rate4" title="Very good">4 stars</label>
+        <input name="rating" type="radio" id="first-rate5" name="rating" value="5" />
+        <label for="first-rate5" title="Amazing">5 stars</label>
+      </fieldset>
+    </div>
+
       <div class="mb-3">
         <label for="review" class="form-label">Review</label>
         <textarea name="review" id="review" class="form-control " rows="6" cols="10" title="Provide your related views on this place" placeholder="Share your experience in Brief" required></textarea>
@@ -66,9 +80,11 @@
         <div class="card review-card mb-3 mt-3 ms-4">
           <div class="card-body">
             <h5 class="card-title"> @<i><%= review.author.username %></i></h5>
-            <p class="card-text"><%= review.comment %></p>
-            <div class="card-text" style="display: flex; justify-content: space-between;">
-              <span><%= review.rating %> stars</span>
+            <span> <p class="starability-result" data-rating=<%= review.rating %>>
+              Rated: 3 stars
+            </p></span>
+            <div class="card-text" style="display: flex; justify-content: space-between;align-items: flex-end;">
+              <p class="card-text"><%= review.comment %></p>
               <span>
                 <form style="display: inline;" method="post" action="/listings/<%= list._id %>/reviews/<%= review._id %>?_method=DELETE" >
                   <% if(currentUser && currentUser._id.equals(review.author._id)){ %>
