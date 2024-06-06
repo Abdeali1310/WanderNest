@@ -3,7 +3,6 @@ const router = express.Router();
 const { wrapAsync } = require("../utils/wrapAsync");
 const { isLoggedIn, isOwner, validateListing } = require("../middlewares/auth");
 
-
 const {
   showAllListings,
   createNewListForm,
@@ -14,31 +13,20 @@ const {
   showList,
 } = require("../controllers/listingController");
 
-//listing route
-router.get("/", wrapAsync(showAllListings));
+router.route("/").get(wrapAsync(showAllListings));
 
-//create new list
-router.get("/new", isLoggedIn, wrapAsync(createNewListForm));
+router
+  .route("/new")
+  .get(isLoggedIn, wrapAsync(createNewListForm))
+  .post(isLoggedIn, validateListing, wrapAsync(createNewList));
 
-//handling post request for create
-router.post("/new", isLoggedIn, validateListing, wrapAsync(createNewList));
+router
+  .route("/:id/edit")
+  .get(isLoggedIn, isOwner, wrapAsync(editNewListForm))
+  .patch(isLoggedIn, isOwner, validateListing, wrapAsync(editNewList));
 
-//edit get route
-router.get("/:id/edit", isLoggedIn, isOwner, wrapAsync(editNewListForm));
+router.route("/:id/delete").delete(isLoggedIn, isOwner, wrapAsync(destroyList));
 
-//handling put route
-router.patch(
-  "/:id/edit",
-  isLoggedIn,
-  isOwner,
-  validateListing,
-  wrapAsync(editNewList)
-);
-
-//delete route
-router.delete("/:id/delete", isLoggedIn, isOwner, wrapAsync(destroyList));
-
-//show list route
-router.get("/:id", wrapAsync(showList));
+router.route("/:id").get(wrapAsync(showList));
 
 module.exports = router;
