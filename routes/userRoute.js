@@ -7,65 +7,34 @@ const expressError = require("../utils/expressError");
 const passport = require("passport");
 const { redirectUrl } = require("../middlewares/auth");
 
-router.get("/signup", (req, res) => {
-  res.render("users/signup");
-});
+const {
+  signupForm,
+  signup,
+  loginForm,
+  login,
+  logout,
+} = require("../controllers/userController");
 
+//signup form route
+router.get("/signup", wrapAsync(signupForm));
+
+//signup route
+router.post("/signup", wrapAsync(signup));
+
+//login form route
+router.get("/login", wrapAsync(loginForm));
+
+//login route
 router.post(
-  "/signup",
-  wrapAsync(async (req, res) => {
-    try {
-      let { username, email, password } = req.body;
-      let newUser = new User({
-        email,
-        username,
-      });
-
-      const registeredUser = await User.register(newUser, password);
-      req.login(registeredUser,(err=>{
-        if(err) return next(err)
-        req.flash("success", `Hey ${username}, Welcome to Wanderlust`);
-        res.redirect("/listings");
-      }))
-    } catch (error) {
-      req.flash("error", error.message);
-      res.redirect("/user/signup");
-    }
-  })
+  "/login",
+  redirectUrl,
+  passport.authenticate("local", {
+    failureRedirect: "/user/login",
+    failureFlash: true,
+  }),
+  wrapAsync(login)
 );
 
-router.get('/login',(req,res)=>{
-    res.render('users/login')
-})
-
-router.post('/login',redirectUrl,passport.authenticate ('local',{
-    failureRedirect:'/user/login',
-    failureFlash: true,
-}),async (req,res)=>{
-  const { username } = req.body;
-  req.flash('success', `Hey ${username}, Welcome Back to Wanderlust`);
-
-  let redirectUrl = res.locals.redirectUrl || '/listings';
-
-  // Check if the redirect URL is for a delete route
-
-  const deleteMatchListings = redirectUrl.match(/\/listings\/([^\/]+)\/delete/);
-  const deleteMatchReviews = redirectUrl.match(/\/listings\/([^\/]+)\/reviews\/([^\/]+)\?_method=DELETE/);
-
-  if (deleteMatchListings && redirectUrl.includes('?_method=DELETE') || deleteMatchReviews && redirectUrl.includes('?_method=DELETE')) {
-      // If the URL contains "/delete" in either listings or reviews
-      redirectUrl = '/listings';
-  }
-
-  res.redirect(redirectUrl);
-})
-
-
-router.get('/logout',(req,res,next)=>{
-  req.logout((err)=>{
-    if(err) return next(err)
-    req.flash('success','You are Successfully Logged Out')
-    res.redirect('/listings')
-  })
-})
+//logout route
+router.get("/logout", wrapAsync(logout));
 module.exports = router;
