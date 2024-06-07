@@ -20,7 +20,7 @@ async function imgURL() {
         const listings = await Listing.find({});
         let count = 1;
         for (const listing of listings) {
-            await Listing.findByIdAndUpdate(listing._id, { image: `/images/image${count}.avif` });
+            await Listing.findByIdAndUpdate(listing._id, { image: { url: `/images/image${count}.avif` } });
             count++;
         }
         console.log('Image URLs updated successfully');
@@ -28,6 +28,7 @@ async function imgURL() {
         console.error('Error updating image URLs:', error);
     }
 }
+
 
 init();
 imgURL();

@@ -1,7 +1,7 @@
 <% layout("/layout/boilerplate") %>
 
 <body>
-    <form action="/listings/new" method="post" class="row g-3 needs-validation" autocomplete="on" novalidate >
+    <form action="/listings/new" method="post" class="row g-3 needs-validation" enctype="multipart/form-data" autocomplete="on" novalidate >
             <h3>Create New List</h3>
             <div class="col-12">
               <label for="title" class="form-label">Title</label>
@@ -17,13 +17,21 @@
                 Please Enter minimum of 15 characters
               </div>
             </div>
-            <div class="col-md-6">
+            <!-- <div class="col-md-6">
               <label for="img" class="form-label">Image link</label>
               <input type="text" class="form-control" id="img" placeholder="https://unsplash.com/images/....." name="image">
               <div class="valid-feedback">
                 
               </div>
+            </div> -->
+            <div class="col-md-6">
+              <label for="image" class="form-label">Upload Image</label>
+              <input type="file" class="form-control" name="image" id="image">
+              <div class="valid-feedback">
+                
+              </div>
             </div>
+
             <div class="col-md-6">
               <label for="price" class="form-label">Price</label>
               <input type="text" class="form-control" placeholder="&#8377; 1,200" name="price" required>

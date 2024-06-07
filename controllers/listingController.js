@@ -24,6 +24,8 @@ const createNewListForm = async (req, res) => {
 
 const createNewList = async (req, res, next) => {
   const { title, description, image, price, country, location } = req.body;
+  const url = req.file.path;
+  const filename = req.file.filename
   //checking for custom error
   const newList = new Listing({
     title,
@@ -34,6 +36,7 @@ const createNewList = async (req, res, next) => {
     location,
   });
   newList.owner = req.user._id;
+  newList.image = {url,filename}
   await newList.save();
   //flash message for listing created
   req.flash("success", "New Listing Created!");
