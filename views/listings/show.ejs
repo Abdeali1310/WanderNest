@@ -9,7 +9,7 @@
       <p class="show-card-text">
         created by <i><%= list.owner.username %></i><br />
         <%= list.description %> <br />
-        &#8377; <%= list.price.toLocaleString("en-IN") %> / night <br />
+        &#8377; <%= (list.price+list.price*18/100).toLocaleString("en-IN") %> / night (including <i>18% GST</i>) <br />
         <%= list.location %><br />
         <%= list.country %>
       </p>

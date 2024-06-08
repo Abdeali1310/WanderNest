@@ -64,7 +64,7 @@ app.engine("ejs", ejsMate);
 
 //Home Route
 app.get("/", (req, res) => {
-  res.send("Hey");
+  res.redirect('/listings')
 });
 
 //middleware locals
@@ -83,7 +83,10 @@ app.use('/listings/:id/reviews',reviewRoute)
 app.use('/user',userRoute)
 
 app.use((req,res,next)=>{
-  next(new expressError(404,'Page Not Found'))
+  req.flash('error','Page not Found!\nRedirected to Explore Page')
+  setTimeout(() => {
+    res.redirect('/listings')
+  }, 1500);
 })
 
 //error handling middleware

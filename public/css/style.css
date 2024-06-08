@@ -64,7 +64,7 @@ body{
     display: flex;
     flex-wrap: wrap;
     gap:25px;
-    margin-block: 1.5rem;
+    margin-block: 0.5rem;
     justify-content:flex-start;
 }
 
