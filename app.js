@@ -13,6 +13,7 @@ const expressError = require("./utils/expressError");
 const listingRoute = require('./routes/listingRoute')
 const reviewRoute = require('./routes/reviewRoute');
 const userRoute = require('./routes/userRoute')
+const categoryRoutes = require('.//routes/categoryRoutes')
 //passport
 const passport = require("passport");
 const User = require("./models/user");
@@ -81,6 +82,7 @@ app.use((req,res,next)=>{
 app.use('/listings',listingRoute)
 app.use('/listings/:id/reviews',reviewRoute)
 app.use('/user',userRoute)
+app.use("/category",categoryRoutes)
 
 app.use((req,res,next)=>{
   req.flash('error','Page not Found!\nRedirected to Explore Page')
