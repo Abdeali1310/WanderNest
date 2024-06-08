@@ -27,7 +27,7 @@ router
 router
   .route("/:id/edit")
   .get(isLoggedIn, isOwner, wrapAsync(editNewListForm))
-  .patch(isLoggedIn, isOwner, validateListing, wrapAsync(editNewList));
+  .patch(isLoggedIn, isOwner, upload.single('image'),validateListing, wrapAsync(editNewList));
 
 router.route("/:id/delete").delete(isLoggedIn, isOwner, wrapAsync(destroyList));
 

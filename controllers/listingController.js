@@ -50,7 +50,9 @@ const editNewListForm = async (req, res) => {
     req.flash("error", "List not found!");
     res.redirect("/listings");
   }
-  res.render("listings/edit.ejs", { list });
+  let originalImgUrl = list.image.url;
+  originalImgUrl = originalImgUrl.replace("/upload","/upload/w_250/e_blur:300")
+  res.render("listings/edit.ejs", { list,originalImgUrl });
 };
 
 const editNewList = async (req, res) => {
@@ -58,8 +60,14 @@ const editNewList = async (req, res) => {
   const { title, description, image, price, country, location } = req.body;
   const editedUser = await Listing.findByIdAndUpdate(
     { _id: id },
-    { title, description, image, price, country, location }
+    { title, description, price, country, location }
   );
+
+  if(typeof req.file !== 'undefined'){
+    const url = req.file.path;
+    editedUser.image.url = url;
+    editedUser.save();
+  }
   req.flash("success", "Listing Edited!");
   res.redirect(`/listings/${id}`);
 };
