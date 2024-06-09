@@ -4,6 +4,7 @@ const path = require("path");
 const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate");
 const session = require('express-session')
+const MongoStore = require('connect-mongo')
 const flash = require('connect-flash')
 
 const { connectDB } = require("./connection");
@@ -37,7 +38,23 @@ app.use(methodOverride("_method"));
 app.use(express.static(path.join(__dirname, "/public")));
 
 //session
+
+
+//session for mongo-connect
+const store = MongoStore.create({
+  mongoUrl:process.env.MONGODB_URL,
+  crypto:{
+    secret:"mySecretKey"
+  },
+  touchAfter:24*3600
+})
+
+store.on('error',()=>{
+  console.log("Error in Mongo Session Store");
+})
+
 const sessionOptions = {
+  store,
   secret:"mySecretKey",
   resave:false,
   saveUninitialized:true,
@@ -85,10 +102,7 @@ app.use('/user',userRoute)
 app.use("/category",categoryRoutes)
 
 app.use((req,res,next)=>{
-  req.flash('error','Page not Found!\nRedirected to Explore Page')
-  setTimeout(() => {
-    res.redirect('/listings')
-  }, 1500);
+  next(new expressError(404,'Page not found'))
 })
 
 //error handling middleware

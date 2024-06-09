@@ -15,7 +15,7 @@ const signup = async (req, res) => {
     const registeredUser = await User.register(newUser, password);
     req.login(registeredUser, (err) => {
       if (err) return next(err);
-      req.flash("success", `Hey ${username}, Welcome to Wanderlust`);
+      req.flash("success", `Hey ${username}, Welcome to WanderNest`);
       res.redirect("/listings");
     });
   } catch (error) {
@@ -30,7 +30,7 @@ const loginForm = async (req, res) => {
 
 const login = async (req, res) => {
   const { username } = req.body;
-  req.flash("success", `Hey ${username}, Welcome Back to Wanderlust`);
+  req.flash("success", `Hey ${username}, Welcome Back to WanderNest`);
 
   let redirectUrl = res.locals.redirectUrl || "/listings";
 
