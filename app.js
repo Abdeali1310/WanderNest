@@ -37,8 +37,6 @@ app.use(express.json());
 app.use(methodOverride("_method"));
 app.use(express.static(path.join(__dirname, "/public")));
 
-//session
-
 
 //session for mongo-connect
 const store = MongoStore.create({
@@ -53,6 +51,7 @@ store.on('error',()=>{
   console.log("Error in Mongo Session Store");
 })
 
+//express-session
 const sessionOptions = {
   store,
   secret:"mySecretKey",
