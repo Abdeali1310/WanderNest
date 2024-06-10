@@ -1,41 +1,9 @@
 <% layout("/layout/boilerplate") %>
 
-<style>
-  .filter{
-    text-align: center;
-    opacity: 0.7;
-  }
-  i{
-    font-size: 1.25rem;
-  }
-  .filters{
-    display: flex;
-    flex-wrap: wrap;
-    gap:3rem;
-  }
-  .filter:hover{
-    opacity: 1;
-    cursor: pointer;
-  }
-  a{
-    text-decoration: none;
-    color:black
-  }
-  .switch{
-    border: 1px solid;
-    border-radius: 1rem;
-    display: flex;
-    align-items: center;
-    height: 3rem;
-    padding-left: 3rem;
-    padding-right: 1rem;
-    gap: 5px;
-    margin-left:2rem;
-  }
-</style>
+<link rel="stylesheet" href="/css/index.css" />
+
 <body>
-  
-  <div class="filters">
+  <div class="filters filter-items">
     <a href="/listings">
       <div class="icon filter">
         <i class="fa-solid fa-eye"></i>
@@ -54,111 +22,115 @@
         <div class="desc"><p>Bedrooms</p></div>
       </div>
     </a>
-    
+
     <a href="/category/Mansion">
       <div class="icon filter">
         <i class="fa-solid fa-hotel"></i>
         <div class="desc"><p>Mansion</p></div>
       </div>
     </a>
-    
+
     <a href="/category/Historic">
       <div class="icon filter">
         <i class="fa-solid fa-landmark"></i>
         <div class="desc"><p>Historic</p></div>
       </div>
     </a>
-    
+
     <a href="/category/Farm">
       <div class="icon filter">
         <i class="fa-solid fa-cow"></i>
         <div class="desc"><p>Farm</p></div>
       </div>
     </a>
-    
+
     <a href="/category/Mountain">
       <div class="icon filter">
         <i class="fa-solid fa-mountain-city"></i>
         <div class="desc"><p>Mountain</p></div>
       </div>
     </a>
-    
+
     <a href="/category/CamperVan">
       <div class="icon filter">
         <i class="fa-solid fa-caravan"></i>
         <div class="desc"><p>Camper Van</p></div>
       </div>
     </a>
-    
+
     <a href="/category/Beach">
       <div class="icon filter">
         <i class="fa-solid fa-umbrella-beach"></i>
         <div class="desc"><p>Beach</p></div>
       </div>
     </a>
-    
+
     <a href="/category/Pools">
       <div class="icon filter">
         <i class="fa-solid fa-person-swimming"></i>
         <div class="desc"><p>Pools</p></div>
       </div>
     </a>
-    
+
     <a href="/category/Castle">
       <div class="icon filter">
         <i class="fa-brands fa-fort-awesome"></i>
         <div class="desc"><p>Castle</p></div>
       </div>
     </a>
-    
+
     <a href="/category/Lakes">
       <div class="icon filter">
         <i class="fa-solid fa-water"></i>
         <div class="desc"><p>Lakes</p></div>
       </div>
     </a>
-    
-  
-    <div class="form-check form-switch switch">
-      <input class="form-check-input form-check-reverse" type="checkbox" role="switch" id="flexSwitchCheckDefault">
-      <label class="form-check-label" for="flexSwitchCheckDefault"><b>Display Tax of each list</b></label>
+
+    <div class="form-check form-switch switch btn btn-info">
+      <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" style="visibility: hidden;">
+      <label class="form-check-label " for="flexSwitchCheckDefault"><b>Total Tax in(%)</b></label>
     </div>
   </div>
-    <div class="card-container">
-      <% if(allListings.length !== 0) { %>
-        <% allListings.map((list)=>{ %>
-          <a href="/listings/<%= list._id %>">
-              <div class="card listing-card" style="width: 18rem">
-                  <img src="<%= list.image.url %>" class="card-img-top" alt="<%= list.title %>" />
-                  <div class="card-body">
-                    <h5 class="card-title"><%= list.title %></h5>
-                    <p class="card-text">
-                      &#8377; <%= list.price.toLocaleString("en-IN") %> / night <i class="gst" style="font-size: 1rem;display: none;">+18% GST</i> <br />
-                      <%= list.location %><br /><br />
-                    </p>
-                  </div>
-                </div>
-          </a>
-      <% }) %>
-      <% } else { %>
-        <h3>No listings yet in this category</h3><br /  >
-        <p>want to add? <a href="/listings/new">Create new list</a></p>
-      <% } %>
-        
-    </div>
+  <h3 class="heading">Explore Unique Stays on the Go</h3>
+  <div class="card-container">
+    <% if(allListings.length !== 0) { %> <% allListings.map((list)=>{ %>
+    <a href="/listings/<%= list._id %>">
+      <div class="card listing-card">
+        <img
+          src="<%= list.image.url %>"
+          class="card-img-top"
+          alt="<%= list.title %>"
+        />
+        <div class="card-body">
+          <h5 class="card-title"><%= list.title %></h5>
+          <p class="card-text">
+            &#8377; <%= list.price.toLocaleString("en-IN") %> / night
+            <i class="gst" style="font-size: 1rem; display: none">+18% GST</i>
+            <br />
+            <%= list.location %><br /><br />
+          </p>
+        </div>
+      </div>
+    </a>
+    <% }) %> <% } else { %>
+    <h3>No listings yet in this category</h3>
+    <br / >
+    <p>want to add? <a href="/listings/new">Create new list</a></p>
+    <% } %>
+  </div>
 </body>
 
 <script>
-  let toggleSwitch = document.querySelector("#flexSwitchCheckDefault");
-  toggleSwitch.addEventListener('click',()=>{
-    let gstToggle = document.getElementsByClassName('gst')
-    for (const gst of gstToggle) {
-      
-      if(gst.style.display !== 'none'){
-        gst.style.display = 'none'
-      }else{
-        gst.style.display = 'inline'
+  const toggleSwitch = document.querySelector("#flexSwitchCheckDefault");
+
+  toggleSwitch.addEventListener("click", () => {
+      let gstToggle = document.getElementsByClassName("gst");
+      for (const gst of gstToggle) {
+          if (toggleSwitch.checked) {
+              gst.style.display = "inline";
+          } else {
+              gst.style.display = "none";
+          }
       }
-    }
-  })
+  });
 </script>

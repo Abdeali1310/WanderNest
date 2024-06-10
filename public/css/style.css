@@ -2,6 +2,7 @@ body{
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    background-color: #f7f7f7 !important;
 }
 
 /* body container */
@@ -15,7 +16,7 @@ body{
 /* navbar */
 
 .navbar{
-    background: white;
+    background: #fbf8f8 !important;
 }
 
 .nav-link{
@@ -111,6 +112,10 @@ body{
     max-width: 600px;
 }
 
+.listing-card{
+    width:18rem;
+}
+
 .auto-resize {
     width: 100%;
     overflow: hidden;
@@ -152,13 +157,15 @@ form{
     }
 }
 
-@media only screen and (min-width: 768px) and (max-width: 1024px) {
+@media only screen and (min-width: 425px) and (max-width: 1024px) {
     .body-container{
         margin-block: 25px;
         margin-left: 3rem;
         margin-right: 1rem;
     }
-    
+    .card-container{
+        margin: inherit;
+    }
 }
 
 @media only screen and (min-width: 425px) and (max-width: 767px) {
@@ -172,7 +179,7 @@ form{
     }
 }
 
-@media only screen and (min-width: 320px) and (max-width: 425px) {
+@media only screen and (min-width: 320px) and (max-width: 424px) {
     .body-container{
         margin-block: 25px;
         margin-left: 1rem;
@@ -181,4 +188,30 @@ form{
     form{
         width:100%;
     }
+
+    .card-container{
+        margin: inherit;
+    }
+    .listing-card{
+        width:16rem;
+    }
+    .heading{
+        font-size: 1rem;
+    }
+}
+
+
+
+@media only screen and (min-width: 425px){
+    .card-container{
+        margin-inline: 2.5rem;
+    }
+    
+}
+
+@media only screen and (min-width: 375px)  and (max-width: 425px){
+    .card-container{
+        margin-inline: 2rem;
+    }
+    
 }

@@ -1,8 +1,4 @@
-<style>
-  .search-nav{
-    width:70%;
-  }
-</style>
+<link rel="stylesheet" href="/css/filter.css">
 
 <nav class="navbar navbar-expand-md bg-body-light border-bottom sticky-top mb-2">
   <div class="container-fluid">
@@ -19,17 +15,17 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-      <div class="navbar-nav">
+      <div class="navbar-nav explore">
         <a class="nav-link" href="/listings">Explore</a>
       </div>
       
       <div class="search-nav">
-        <form class="d-flex needs-validation" method="get" action="/search" role="search" novalidate>
+        <form class="d-flex needs-validation search-form" method="get" action="/search" role="search" novalidate>
           <input class="form-control me-2" type="search" name="listName" placeholder="Search your destinations" aria-label="Search" required>
           <button class="btn btn-outline-success" type="submit" style="border: none;"><i class="fa-solid fa-magnifying-glass"></i></button>
         </form>
       </div>
-      <div class="navbar-nav ms-auto">
+      <div class="navbar-nav call-to-action ms-auto">
         <a class="nav-link" href="/listings/new">Airbnb your home</a>
         <% if(!currentUser) { %>
           <a class="nav-link" aria-current="page" href="/user/signup"><b>SignUp</b></a>
@@ -38,6 +34,100 @@
           <a class="nav-link" href="/user/logout"><b>Logout</b></a>
         <% } %>
       </div>
+      <!-- filter items -->
+      <div class="navbar-nav filter-item" >
+        <div class="filters">
+          <a href="/listings">
+            <div class="icon filter">
+              <i class="fa-solid fa-eye"></i>
+              <div class="desc"><p>Show all</p></div>
+            </div>
+          </a>
+          <a href="/category/Trending">
+            <div class="icon filter">
+              <i class="fa-solid fa-fire"></i>
+              <div class="desc"><p>Trending</p></div>
+            </div>
+          </a>
+          <a href="/category/Bedrooms">
+            <div class="icon filter">
+              <i class="fa-solid fa-bed"></i>
+              <div class="desc"><p>Bedrooms</p></div>
+            </div>
+          </a>
+          
+          <a href="/category/Mansion">
+            <div class="icon filter">
+              <i class="fa-solid fa-hotel"></i>
+              <div class="desc"><p>Mansion</p></div>
+            </div>
+          </a>
+          
+          <a href="/category/Historic">
+            <div class="icon filter">
+              <i class="fa-solid fa-landmark"></i>
+              <div class="desc"><p>Historic</p></div>
+            </div>
+          </a>
+          
+          <a href="/category/Farm">
+            <div class="icon filter">
+              <i class="fa-solid fa-cow"></i>
+              <div class="desc"><p>Farm</p></div>
+            </div>
+          </a>
+          
+          <a href="/category/Mountain">
+            <div class="icon filter">
+              <i class="fa-solid fa-mountain-city"></i>
+              <div class="desc"><p>Mountain</p></div>
+            </div>
+          </a>
+          
+          <a href="/category/CamperVan">
+            <div class="icon filter">
+              <i class="fa-solid fa-caravan"></i>
+              <div class="desc"><p>Camper Van</p></div>
+            </div>
+          </a>
+          
+          <a href="/category/Beach">
+            <div class="icon filter">
+              <i class="fa-solid fa-umbrella-beach"></i>
+              <div class="desc"><p>Beach</p></div>
+            </div>
+          </a>
+          
+          <a href="/category/Pools">
+            <div class="icon filter">
+              <i class="fa-solid fa-person-swimming"></i>
+              <div class="desc"><p>Pools</p></div>
+            </div>
+          </a>
+          
+          <a href="/category/Castle">
+            <div class="icon filter">
+              <i class="fa-brands fa-fort-awesome"></i>
+              <div class="desc"><p>Castle</p></div>
+            </div>
+          </a>
+          
+          <a href="/category/Lakes">
+            <div class="icon filter">
+              <i class="fa-solid fa-water"></i>
+              <div class="desc"><p>Lakes</p></div>
+            </div>
+          </a>
+            
+        
+          <div class="form-check form-switch switch">
+            <input class="form-check-input form-check-reverse" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+            <label class="form-check-label" for="flexSwitchCheckDefault"><b>Display Tax of each list</b></label>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
+  
 </nav>
+
