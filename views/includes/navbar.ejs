@@ -24,8 +24,8 @@
       </div>
       
       <div class="search-nav">
-        <form class="d-flex" role="search">
-          <input class="form-control me-2" type="search" placeholder="Search your Destinations" aria-label="Search">
+        <form class="d-flex needs-validation" method="get" action="/search" role="search" novalidate>
+          <input class="form-control me-2" type="search" name="listName" placeholder="Search your destinations" aria-label="Search" required>
           <button class="btn btn-outline-success" type="submit" style="border: none;"><i class="fa-solid fa-magnifying-glass"></i></button>
         </form>
       </div>

@@ -14,7 +14,9 @@ const expressError = require("./utils/expressError");
 const listingRoute = require('./routes/listingRoute')
 const reviewRoute = require('./routes/reviewRoute');
 const userRoute = require('./routes/userRoute')
-const categoryRoutes = require('.//routes/categoryRoutes')
+const categoryRoutes = require('./routes/categoryRoutes')
+const searchRoutes = require('./routes/searchRoute')
+
 //passport
 const passport = require("passport");
 const User = require("./models/user");
@@ -99,6 +101,7 @@ app.use('/listings',listingRoute)
 app.use('/listings/:id/reviews',reviewRoute)
 app.use('/user',userRoute)
 app.use("/category",categoryRoutes)
+app.use('/search',searchRoutes)
 
 app.use((req,res,next)=>{
   next(new expressError(404,'Page not found'))
