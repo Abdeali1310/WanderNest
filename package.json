@@ -1,4 +1,7 @@
 {
+  "engines": {
+    "node": "18.12.1"
+  },
   "name": "apna-clg---simple",
   "version": "1.0.0",
   "description": "",
