@@ -10,7 +10,7 @@ i {
 .filters {
     display: flex;
     flex-wrap: wrap;
-    gap: 2.3rem;
+    gap: 2rem;
     margin-left:3rem;
 }
 
