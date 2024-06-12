@@ -1,6 +1,6 @@
 # WanderNest
 
-WanderNest is a web application built using the MERN stack, designed to simplify the process for property owners to list and showcase their accommodations.
+WanderNest is a web application, designed to simplify the process for property owners to list and showcase their accommodations.
 
 ## Features
 
@@ -10,7 +10,8 @@ WanderNest is a web application built using the MERN stack, designed to simplify
 - **Image Upload**: Multer is utilized for handling image uploads, allowing property owners to upload images of their accommodations.
 - **Data Storage**: MongoDB Atlas is used as the database to store listing information and user data.
 - **Responsive Design**: The application is responsive and optimized for mobile devices, ensuring a seamless experience for users on various screen sizes.
-- **CSS Styling**: Bootstrap is used for CSS styling, providing a sleek and modern design.
+- **CSS Styling**: Bootstrap is used for CSS styling and form validation, providing a sleek and modern design.
+- **Ejs**: Use to render templates
 
 ## License
 
