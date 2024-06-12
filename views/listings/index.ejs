@@ -87,14 +87,28 @@
     </a>
 
     <div class="form-check form-switch switch btn btn-info">
-      <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" style="visibility: hidden;">
-      <label class="form-check-label " for="flexSwitchCheckDefault"><b>Total Tax in(%)</b></label>
+      <input
+        class="form-check-input"
+        type="checkbox"
+        role="switch"
+        id="flexSwitchCheckDefault"
+        style="visibility: hidden"
+      />
+      <label class="form-check-label" for="flexSwitchCheckDefault"
+        ><b>Total Tax in(%)</b></label
+      >
     </div>
   </div>
   <% if (typeof search !== 'undefined' && search !== '') { %>
-    <h5 class="search" style="margin-block: 2rem; font-size: large;">Search results for <span style="color:#fe424d"><%= search %> : </span> </h5>
-  <% } else { %>
-    <h3 class="heading">Explore Unique Stays on the Go</h3>
+  <h5 class="search" style="margin-block: 2rem; font-size: large">
+    Search results for <span style="color: #fe424d"><%= search %> : </span>
+  </h5>
+  <% } else if(typeof category !== 'undefined' && category !== ''){ %>
+  <h5 class="search" style="margin-block: 2rem; font-size: large">
+    Search results for <span style="color: #fe424d"><%= category %> : </span>
+  </h5>
+  <%} else{ %>
+  <h3 class="heading">Explore Unique Stays on the Go</h3>
   <% } %>
   <div class="card-container">
     <% if(allListings.length !== 0) { %> <% allListings.map((list)=>{ %>
@@ -128,13 +142,13 @@
   const toggleSwitch = document.querySelector("#flexSwitchCheckDefault");
 
   toggleSwitch.addEventListener("click", () => {
-      let gstToggle = document.getElementsByClassName("gst");
-      for (const gst of gstToggle) {
-          if (toggleSwitch.checked) {
-              gst.style.display = "inline";
-          } else {
-              gst.style.display = "none";
-          }
+    let gstToggle = document.getElementsByClassName("gst");
+    for (const gst of gstToggle) {
+      if (toggleSwitch.checked) {
+        gst.style.display = "inline";
+      } else {
+        gst.style.display = "none";
       }
+    }
   });
 </script>
