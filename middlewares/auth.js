@@ -60,4 +60,21 @@ const isReviewOwner = async (req,res,next)=>{
   }
   next();
 }
-module.exports =  {isLoggedIn,redirectUrl,isReviewOwner,validateListing,isOwner,validateReview}
+
+const checkListDeleted = (req, res, next) => {
+  if (req.session.listDeleted) {
+    req.session.listDeleted = false; // Reset the flag
+    return res.redirect('/'); // Redirect to the home page
+  }
+  next();
+};
+
+const checkListEdited = (req, res, next) => {
+  if (req.session.listEdited) {
+    req.session.listEdited = false; // Reset the flag
+    return res.redirect('/'); // Redirect to the home page
+  }
+  next();
+};
+
+module.exports =  {isLoggedIn,redirectUrl,isReviewOwner,validateListing,isOwner,validateReview,checkListDeleted,checkListEdited}

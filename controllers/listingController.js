@@ -61,17 +61,18 @@ const editNewListForm = async (req, res) => {
 
 const editNewList = async (req, res) => {
   const id = req.params.id;
-  const { title, description, image, price, country, location } = req.body;
+  const { title, description, image, price, country, location,category } = req.body;
   const editedUser = await Listing.findByIdAndUpdate(
     { _id: id },
-    { title, description, price, country, location }
+    { title, description, price, country, location,category }
   );
 
   if(typeof req.file !== 'undefined'){
     const url = req.file.path;
-    editedUser.image.url = url;
-    editedUser.save();
+    editedUser.image.url = url; 
+    await editedUser.save();
   }
+  req.session.listEdited = true;
   req.flash("success", "Listing Edited!");
   res.redirect(`/listings/${id}`);
 };
@@ -79,9 +80,13 @@ const editNewList = async (req, res) => {
 const destroyList = async (req, res) => {
   const id = req.params.id;
   const deletedList = await Listing.findByIdAndDelete(id);
-  req.flash("success", "Listing Deleted!");
+  if (deletedList) {
+    req.session.listDeleted = true; // Set a flag in the session
+    req.flash("success", "Listing Deleted!");
+  }
   res.redirect("/listings");
 };
+
 
 module.exports = {
   showAllListings,

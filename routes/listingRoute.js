@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const { wrapAsync } = require("../utils/wrapAsync");
-const { isLoggedIn, isOwner, validateListing } = require("../middlewares/auth");
+const { isLoggedIn, isOwner, validateListing, checkListDeleted, checkListEdited } = require("../middlewares/auth");
 const multer  = require('multer')
 const { storage } = require("../cloudConfig");
 const upload = multer({storage })
@@ -31,6 +31,6 @@ router
 
 router.route("/:id/delete").delete(isLoggedIn, isOwner, wrapAsync(destroyList));
 
-router.route("/:id").get(wrapAsync(showList));
+router.route("/:id").get(checkListDeleted,wrapAsync(showList));
 
 module.exports = router;
