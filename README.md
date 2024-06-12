@@ -1,6 +1,3 @@
-
-Sure, here's a README.md file tailored to your project:
-
 WanderNest,
 -> WanderNest is a web application built using the MERN stack, designed to simplify the process for property owners to list and showcase their accommodations.
 
