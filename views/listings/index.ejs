@@ -91,7 +91,11 @@
       <label class="form-check-label " for="flexSwitchCheckDefault"><b>Total Tax in(%)</b></label>
     </div>
   </div>
-  <h3 class="heading">Explore Unique Stays on the Go</h3>
+  <% if (typeof search !== 'undefined' && search !== '') { %>
+    <h5 class="search" style="margin-block: 2rem; font-size: large;">Search results for <span style="color:#fe424d"><%= search %> : </span> </h5>
+  <% } else { %>
+    <h3 class="heading">Explore Unique Stays on the Go</h3>
+  <% } %>
   <div class="card-container">
     <% if(allListings.length !== 0) { %> <% allListings.map((list)=>{ %>
     <a href="/listings/<%= list._id %>">
