@@ -336,6 +336,7 @@ form {
 
     .show-card-text {
         font-size: 1rem;
+        width:300px;
     }
 
     .show-card {
