@@ -1,6 +1,6 @@
 # WanderNest
 
-WanderNest is a web application, designed to simplify the process for property owners to list and showcase their accommodations.
+WanderNest is a mini practice project, designed to simplify the process for property owners to list and showcase their accommodations.
 
 ## Features
 
